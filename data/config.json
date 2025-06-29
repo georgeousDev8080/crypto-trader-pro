@@ -1,0 +1,104 @@
+{
+  "api": {
+    "coinGecko": {
+      "baseUrl": "https://api.coingecko.com/api/v3",
+      "rateLimit": 50,
+      "timeout": 10000
+    },
+    "binance": {
+      "baseUrl": "https://api.binance.com/api/v3",
+      "rateLimit": 1200,
+      "timeout": 5000
+    },
+    "alternative": {
+      "baseUrl": "https://api.alternative.me",
+      "rateLimit": 100,
+      "timeout": 10000
+    }
+  },
+  "prediction": {
+    "models": {
+      "hybrid-tft": {
+        "enabled": true,
+        "accuracy": 0.967,
+        "description": "Hybrid Temporal Fusion Transformer with multi-source data integration",
+        "features": ["price", "volume", "technical", "onchain", "sentiment"],
+        "updateInterval": 300000
+      },
+      "lstm-gru": {
+        "enabled": true,
+        "accuracy": 0.942,
+        "description": "LSTM-GRU ensemble for sequential pattern recognition",
+        "features": ["price", "volume", "technical"],
+        "updateInterval": 600000
+      },
+      "ensemble": {
+        "enabled": true,
+        "accuracy": 0.973,
+        "description": "Ensemble of multiple neural networks",
+        "features": ["price", "volume", "technical", "onchain", "sentiment", "correlation"],
+        "updateInterval": 180000
+      },
+      "sentiment": {
+        "enabled": true,
+        "accuracy": 0.887,
+        "description": "Social sentiment and news analysis model",
+        "features": ["sentiment", "social", "news"],
+        "updateInterval": 900000
+      }
+    },
+    "defaultModel": "hybrid-tft",
+    "confidenceThreshold": 0.6,
+    "maxPredictionHorizon": "7d"
+  },
+  "trading": {
+    "defaultCommission": 0.001,
+    "maxPositionSize": 0.25,
+    "maxDailyLoss": 0.05,
+    "maxDrawdown": 0.20,
+    "riskFreeRate": 0.02,
+    "rebalanceInterval": 86400000
+  },
+  "ui": {
+    "updateInterval": 30000,
+    "chartRefreshInterval": 60000,
+    "animationDuration": 300,
+    "defaultTimeframe": "1d",
+    "defaultCrypto": "BTC",
+    "theme": "dark"
+  },
+  "features": {
+    "realTimeData": true,
+    "pushNotifications": true,
+    "portfolioTracking": true,
+    "backtesting": true,
+    "paperTrading": true,
+    "exportData": true,
+    "socialTrading": false
+  },
+  "alerts": {
+    "priceChange": {
+      "enabled": true,
+      "thresholds": [0.05, 0.1, 0.15, 0.2]
+    },
+    "predictionConfidence": {
+      "enabled": true,
+      "threshold": 0.8
+    },
+    "riskManagement": {
+      "enabled": true,
+      "maxDrawdown": 0.15
+    }
+  },
+  "cache": {
+    "duration": 300000,
+    "maxSize": 100,
+    "compressionEnabled": true
+  },
+  "performance": {
+    "lazy Loading": true,
+    "imageOptimization": true,
+    "bundleOptimization": true,
+    "serviceWorker": true
+  }
+}

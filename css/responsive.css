@@ -1,0 +1,397 @@
+/* Responsive Design for Mobile and Tablet */
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1rem;
+        box-shadow: var(--shadow-primary);
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: block;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* Dashboard Mobile */
+    .market-overview {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .crypto-card {
+        padding: 1.5rem;
+    }
+
+    .crypto-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prediction-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .prediction-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .crypto-selector,
+    .timeframe-selector {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .model-tabs {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .model-tab {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.8rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .model-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .prediction-chart-container {
+        height: 300px;
+        padding: 1rem;
+    }
+
+    /* Analysis Mobile */
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .indicators-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Portfolio Mobile */
+    .portfolio-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-stats {
+        order: 2;
+    }
+
+    .portfolio-allocation {
+        order: 1;
+    }
+
+    .signals-table {
+        font-size: 0.8rem;
+    }
+
+    .signals-table th,
+    .signals-table td {
+        padding: 0.5rem;
+    }
+
+    /* Research Mobile */
+    .research-tabs {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .research-tab {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.8rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .correlation-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .sentiment-sources {
+        grid-template-columns: 1fr;
+    }
+
+    .backtest-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .backtest-results {
+        grid-template-columns: 1fr;
+    }
+
+    .risk-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-toggle {
+        display: none;
+    }
+
+    .market-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .prediction-cards {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .model-content {
+        grid-template-columns: 1fr;
+    }
+
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .indicators-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .portfolio-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .correlation-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sentiment-sources {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .backtest-results {
+        grid-template-columns: 1fr;
+    }
+
+    .risk-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1600px;
+    }
+
+    .market-overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prediction-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .indicators-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .correlation-metrics {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .sentiment-sources {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .risk-metrics {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .header,
+    .nav-toggle,
+    .loading-overlay {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-top: 0;
+    }
+
+    .section {
+        display: block !important;
+        page-break-after: always;
+    }
+
+    .section:last-child {
+        page-break-after: avoid;
+    }
+
+    * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+
+    .crypto-card,
+    .prediction-card,
+    .analysis-panel,
+    .indicators-panel,
+    .trading-signals,
+    .research-panel {
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --bg-primary: #000000;
+        --bg-secondary: #1a1a1a;
+        --bg-card: #2a2a2a;
+        --text-primary: #ffffff;
+        --text-secondary: #cccccc;
+        --border-color: #666666;
+        --primary-color: #00ccff;
+        --success-color: #00ff00;
+        --danger-color: #ff0000;
+        --warning-color: #ffff00;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .loading-spinner i {
+        animation: none;
+    }
+}
+
+/* Dark Mode Toggle Support */
+@media (prefers-color-scheme: light) {
+    :root {
+        --primary-color: #0066cc;
+        --secondary-color: #f8f9fa;
+        --accent-color: #e9ecef;
+        --text-primary: #212529;
+        --text-secondary: #6c757d;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --bg-card: #ffffff;
+        --border-color: #dee2e6;
+    }
+
+    .crypto-card,
+    .prediction-card,
+    .analysis-panel,
+    .indicators-panel,
+    .trading-signals,
+    .research-panel {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Accessibility Improvements */
+@media (max-width: 768px) {
+    .crypto-btn,
+    .timeframe-btn,
+    .model-tab,
+    .research-tab {
+        min-height: 44px; /* Minimum touch target size */
+        min-width: 44px;
+    }
+
+    .nav-link {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Orientation Changes */
+@media (orientation: landscape) and (max-height: 500px) {
+    .header {
+        padding: 0.5rem 0;
+    }
+
+    .navbar {
+        padding: 0.5rem 2rem;
+    }
+
+    .main-content {
+        margin-top: 60px;
+        padding: 1rem 0;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .prediction-chart-container,
+    .chart-container {
+        height: 250px;
+    }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 2560px) {
+    .container {
+        max-width: 2400px;
+    }
+
+    .market-overview {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .prediction-cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .analysis-grid {
+        grid-template-columns: 3fr 2fr;
+    }
+
+    .model-content {
+        grid-template-columns: 3fr 1fr;
+    }
+}

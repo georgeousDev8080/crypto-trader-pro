@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoTrade Pro - Advanced AI Trading Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tensorflow@latest/dist/tf.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>CryptoTrade Pro</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#predictions" class="nav-link">AI Predictions</a>
+                <a href="#analysis" class="nav-link">Technical Analysis</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#research" class="nav-link">Research</a>
+            </div>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="container">
+                <h1 class="section-title">Real-Time Crypto Dashboard</h1>
+                
+                <!-- Market Overview -->
+                <div class="market-overview">
+                    <div class="crypto-card" data-crypto="BTC">
+                        <div class="crypto-header">
+                            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="crypto-icon">
+                            <div class="crypto-info">
+                                <h3>Bitcoin (BTC)</h3>
+                                <span class="crypto-price" id="btc-price">Loading...</span>
+                                <span class="crypto-change" id="btc-change">0.00%</span>
+                            </div>
+                        </div>
+                        <div class="crypto-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Market Cap</span>
+                                <span class="metric-value" id="btc-marketcap">-</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Volume 24h</span>
+                                <span class="metric-value" id="btc-volume">-</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Fear & Greed</span>
+                                <span class="metric-value" id="fear-greed">-</span>
+                            </div>
+                        </div>
+                        <canvas id="btc-mini-chart" class="mini-chart"></canvas>
+                    </div>
+
+                    <div class="crypto-card" data-crypto="ETH">
+                        <div class="crypto-header">
+                            <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="crypto-icon">
+                            <div class="crypto-info">
+                                <h3>Ethereum (ETH)</h3>
+                                <span class="crypto-price" id="eth-price">Loading...</span>
+                                <span class="crypto-change" id="eth-change">0.00%</span>
+                            </div>
+                        </div>
+                        <div class="crypto-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Market Cap</span>
+                                <span class="metric-value" id="eth-marketcap">-</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Volume 24h</span>
+                                <span class="metric-value" id="eth-volume">-</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Gas Price</span>
+                                <span class="metric-value" id="eth-gas">-</span>
+                            </div>
+                        </div>
+                        <canvas id="eth-mini-chart" class="mini-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- AI Prediction Summary -->
+                <div class="prediction-summary">
+                    <h2>AI Prediction Summary</h2>
+                    <div class="prediction-cards">
+                        <div class="prediction-card">
+                            <h3>BTC Hybrid-TFT Model</h3>
+                            <div class="prediction-result">
+                                <span class="prediction-direction" id="btc-direction">BULLISH</span>
+                                <span class="prediction-confidence" id="btc-confidence">94.2%</span>
+                            </div>
+                            <div class="prediction-target">
+                                <span>24h Target: <strong id="btc-target">$67,500</strong></span>
+                            </div>
+                        </div>
+                        <div class="prediction-card">
+                            <h3>ETH Ensemble Model</h3>
+                            <div class="prediction-result">
+                                <span class="prediction-direction" id="eth-direction">BULLISH</span>
+                                <span class="prediction-confidence" id="eth-confidence">91.8%</span>
+                            </div>
+                            <div class="prediction-target">
+                                <span>24h Target: <strong id="eth-target">$3,420</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Predictions Section -->
+        <section id="predictions" class="section">
+            <div class="container">
+                <h1 class="section-title">Advanced AI Predictions</h1>
+                
+                <div class="prediction-controls">
+                    <div class="crypto-selector">
+                        <button class="crypto-btn active" data-crypto="BTC">Bitcoin</button>
+                        <button class="crypto-btn" data-crypto="ETH">Ethereum</button>
+                    </div>
+                    <div class="timeframe-selector">
+                        <button class="timeframe-btn active" data-timeframe="1h">1H</button>
+                        <button class="timeframe-btn" data-timeframe="4h">4H</button>
+                        <button class="timeframe-btn" data-timeframe="1d">1D</button>
+                        <button class="timeframe-btn" data-timeframe="1w">1W</button>
+                    </div>
+                </div>
+
+                <div class="prediction-models">
+                    <div class="model-tabs">
+                        <button class="model-tab active" data-model="hybrid-tft">Hybrid TFT</button>
+                        <button class="model-tab" data-model="lstm-gru">LSTM-GRU</button>
+                        <button class="model-tab" data-model="ensemble">Ensemble</button>
+                        <button class="model-tab" data-model="sentiment">Sentiment AI</button>
+                    </div>
+
+                    <div class="model-content">
+                        <div class="prediction-chart-container">
+                            <canvas id="prediction-chart"></canvas>
+                        </div>
+                        
+                        <div class="model-metrics">
+                            <div class="metric-group">
+                                <h3>Model Performance</h3>
+                                <div class="performance-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Accuracy</span>
+                                        <span class="metric-value" id="model-accuracy">96.7%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">MAPE</span>
+                                        <span class="metric-value" id="model-mape">0.032</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Sharpe Ratio</span>
+                                        <span class="metric-value" id="model-sharpe">2.84</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="signal-strength">
+                                <h3>Signal Strength</h3>
+                                <div class="signal-bars">
+                                    <div class="signal-bar"></div>
+                                    <div class="signal-bar"></div>
+                                    <div class="signal-bar"></div>
+                                    <div class="signal-bar"></div>
+                                    <div class="signal-bar active"></div>
+                                </div>
+                                <span class="signal-label">STRONG BUY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Importance -->
+                <div class="feature-importance">
+                    <h2>Feature Importance Analysis</h2>
+                    <div class="features-chart">
+                        <canvas id="features-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Analysis Section -->
+        <section id="analysis" class="section">
+            <div class="container">
+                <h1 class="section-title">Advanced Technical Analysis</h1>
+                
+                <div class="analysis-grid">
+                    <div class="analysis-panel">
+                        <h2>Price Action & Patterns</h2>
+                        <div class="chart-container">
+                            <canvas id="candlestick-chart"></canvas>
+                        </div>
+                        <div class="pattern-detection">
+                            <h3>Detected Patterns</h3>
+                            <div class="patterns-list" id="patterns-list">
+                                <!-- Patterns will be populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicators-panel">
+                        <h2>Technical Indicators</h2>
+                        <div class="indicators-grid">
+                            <div class="indicator-card">
+                                <h3>RSI (14)</h3>
+                                <div class="indicator-value" id="rsi-value">52.3</div>
+                                <div class="indicator-signal neutral" id="rsi-signal">NEUTRAL</div>
+                            </div>
+                            <div class="indicator-card">
+                                <h3>MACD</h3>
+                                <div class="indicator-value" id="macd-value">+142.5</div>
+                                <div class="indicator-signal bullish" id="macd-signal">BULLISH</div>
+                            </div>
+                            <div class="indicator-card">
+                                <h3>Bollinger Bands</h3>
+                                <div class="indicator-value" id="bb-value">Mid</div>
+                                <div class="indicator-signal neutral" id="bb-signal">NEUTRAL</div>
+                            </div>
+                            <div class="indicator-card">
+                                <h3>Volume Profile</h3>
+                                <div class="indicator-value" id="volume-value">High</div>
+                                <div class="indicator-signal bullish" id="volume-signal">STRONG</div>
+                            </div>
+                        </div>
+
+                        <div class="on-chain-metrics">
+                            <h2>On-Chain Metrics</h2>
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <h3>SOPR</h3>
+                                    <div class="metric-value" id="sopr-value">1.042</div>
+                                    <div class="metric-description">Spent Output Profit Ratio</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h3>Active Addresses</h3>
+                                    <div class="metric-value" id="active-addresses">1.2M</div>
+                                    <div class="metric-description">24h Active Addresses</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h3>Exchange Flow</h3>
+                                    <div class="metric-value" id="exchange-flow">-2.3K BTC</div>
+                                    <div class="metric-description">Net Exchange Flow</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h3>HODL Waves</h3>
+                                    <div class="metric-value" id="hodl-waves">68.2%</div>
+                                    <div class="metric-description">Long-term Holders</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h1 class="section-title">Portfolio Management</h1>
+                
+                <div class="portfolio-overview">
+                    <div class="portfolio-stats">
+                        <div class="stat-card">
+                            <h3>Total Value</h3>
+                            <div class="stat-value">$125,430</div>
+                            <div class="stat-change positive">+12.3%</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>24h P&L</h3>
+                            <div class="stat-value">+$3,287</div>
+                            <div class="stat-change positive">+2.69%</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Sharpe Ratio</h3>
+                            <div class="stat-value">2.84</div>
+                            <div class="stat-description">Risk-adjusted return</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-allocation">
+                        <h2>Asset Allocation</h2>
+                        <canvas id="allocation-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="trading-signals">
+                    <h2>AI Trading Signals</h2>
+                    <div class="signals-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Signal</th>
+                                    <th>Confidence</th>
+                                    <th>Entry</th>
+                                    <th>Target</th>
+                                    <th>Stop Loss</th>
+                                    <th>Risk/Reward</th>
+                                </tr>
+                            </thead>
+                            <tbody id="signals-tbody">
+                                <!-- Signals will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="section">
+            <div class="container">
+                <h1 class="section-title">Research & Analytics</h1>
+                
+                <div class="research-tabs">
+                    <button class="research-tab active" data-tab="correlation">Correlation Analysis</button>
+                    <button class="research-tab" data-tab="sentiment">Sentiment Analysis</button>
+                    <button class="research-tab" data-tab="backtesting">Strategy Backtesting</button>
+                    <button class="research-tab" data-tab="risk">Risk Management</button>
+                </div>
+
+                <div class="research-content">
+                    <div class="research-panel active" id="correlation-panel">
+                        <h2>BTC-ETH Correlation Analysis</h2>
+                        <div class="correlation-chart">
+                            <canvas id="correlation-chart"></canvas>
+                        </div>
+                        <div class="correlation-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Current Correlation</span>
+                                <span class="metric-value">0.847</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">30-day Average</span>
+                                <span class="metric-value">0.823</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Volatility Ratio</span>
+                                <span class="metric-value">1.34</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="research-panel" id="sentiment-panel">
+                        <h2>Market Sentiment Analysis</h2>
+                        <div class="sentiment-sources">
+                            <div class="sentiment-card">
+                                <h3>Twitter Sentiment</h3>
+                                <div class="sentiment-score positive">+0.67</div>
+                                <div class="sentiment-trend">↗ Improving</div>
+                            </div>
+                            <div class="sentiment-card">
+                                <h3>Reddit Sentiment</h3>
+                                <div class="sentiment-score neutral">+0.12</div>
+                                <div class="sentiment-trend">→ Stable</div>
+                            </div>
+                            <div class="sentiment-card">
+                                <h3>News Sentiment</h3>
+                                <div class="sentiment-score positive">+0.45</div>
+                                <div class="sentiment-trend">↗ Positive</div>
+                            </div>
+                        </div>
+                        <div class="sentiment-timeline">
+                            <canvas id="sentiment-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="research-panel" id="backtesting-panel">
+                        <h2>Strategy Backtesting</h2>
+                        <div class="backtest-controls">
+                            <div class="control-group">
+                                <label>Strategy</label>
+                                <select id="strategy-select">
+                                    <option value="hybrid-tft">Hybrid TFT</option>
+                                    <option value="ma-crossover">MA Crossover</option>
+                                    <option value="rsi-divergence">RSI Divergence</option>
+                                    <option value="bollinger-squeeze">Bollinger Squeeze</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Period</label>
+                                <select id="period-select">
+                                    <option value="1m">1 Month</option>
+                                    <option value="3m">3 Months</option>
+                                    <option value="6m">6 Months</option>
+                                    <option value="1y">1 Year</option>
+                                </select>
+                            </div>
+                            <button class="btn-primary" id="run-backtest">Run Backtest</button>
+                        </div>
+                        <div class="backtest-results">
+                            <canvas id="backtest-chart"></canvas>
+                            <div class="backtest-metrics">
+                                <div class="metric">
+                                    <span class="metric-label">Total Return</span>
+                                    <span class="metric-value">+247.3%</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Max Drawdown</span>
+                                    <span class="metric-value">-12.8%</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Win Rate</span>
+                                    <span class="metric-value">73.2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="research-panel" id="risk-panel">
+                        <h2>Risk Management Dashboard</h2>
+                        <div class="risk-metrics">
+                            <div class="risk-card">
+                                <h3>Value at Risk (VaR)</h3>
+                                <div class="risk-value">$2,847</div>
+                                <div class="risk-description">95% confidence, 1-day</div>
+                            </div>
+                            <div class="risk-card">
+                                <h3>Beta vs BTC</h3>
+                                <div class="risk-value">0.89</div>
+                                <div class="risk-description">Portfolio beta</div>
+                            </div>
+                            <div class="risk-card">
+                                <h3>Volatility</h3>
+                                <div class="risk-value">32.4%</div>
+                                <div class="risk-description">Annualized</div>
+                            </div>
+                        </div>
+                        <div class="risk-chart">
+                            <canvas id="risk-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-chart-line"></i>
+            <span>Loading AI Models...</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data-fetcher.js"></script>
+    <script src="js/technical-analysis.js"></script>
+    <script src="js/on-chain-metrics.js"></script>
+    <script src="js/prediction-engine.js"></script>
+    <script src="js/portfolio-manager.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
